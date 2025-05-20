@@ -83,8 +83,9 @@ function findSegmentForWord(word, segments) {
 
   const tmpSegment = segments.find((seg) => {
     const segEnd = seg.start + seg.duration;
-
-    return ((word.start >= seg.start -1) && (word.end <= segEnd + 1));
+    // if the word.end is exactly the same as segEnd, it shows unknown speaker
+    // so we add 1 to the end of the segment
+    return ((word.start >= seg.start) && (word.end <= segEnd + 1));
   });
   // if find doesn't find any matches it returns an undefined
   if (tmpSegment === undefined) {
