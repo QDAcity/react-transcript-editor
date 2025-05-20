@@ -82,10 +82,10 @@ function groupWordsBySpeaker(wordsWithSpeakers) {
 function findSegmentForWord(word, segments) {
 
   const tmpSegment = segments.find((seg) => {
-    const segEnd = seg.start + seg.duration;
     // if the word.end is exactly the same as segEnd, it shows unknown speaker
     // so we add 1 to the end of the segment
-    return ((word.start >= seg.start) && (word.end <= segEnd + 1));
+    const segEnd = seg.start + seg.duration +1 ;
+    return ((word.start >= seg.start) && (word.end <= segEnd));
   });
   // if find doesn't find any matches it returns an undefined
   if (tmpSegment === undefined) {
