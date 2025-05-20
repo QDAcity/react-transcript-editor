@@ -1,7 +1,7 @@
 {
   "name": "@qdacity/react-transcript-editor",
   "description": "A React component to make transcribing audio and video easier and faster.",
-  "version": "1.4.4",
+  "version": "1.4.6",
   "keywords": [
     "transcript",
     "transcriptions",
@@ -119,13 +119,10 @@
     }
   ],
   "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/bbc/react-transcript-editor/issues"
-  },
-  "homepage": "https://github.com/bbc/react-transcript-editor",
+  "homepage": "https://qdacity.com",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/bbc/react-transcript-editor.git"
+    "url": "git+https://github.com/QDAcity/react-transcript-editor.git"
   },
   "browserslist": [
     ">0.2%",
