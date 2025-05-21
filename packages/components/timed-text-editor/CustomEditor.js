@@ -57,6 +57,7 @@ class CustomEditor extends React.Component {
         handleKeyCommand={this.props.handleKeyCommand}
         keyBindingFn={this.props.customKeyBindingFn}
         spellCheck={this.props.spellCheck}
+        changeSpeakerLabel={this.props.changeSpeakerLabel}
       />
     );
   }
