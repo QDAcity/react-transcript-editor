@@ -7,7 +7,10 @@ import {
   convertFromRaw,
   convertToRaw
  } from 'draft-js';
-
+ 
+// needed for the async/await syntax
+// eslint-disable-next-line no-unused-vars
+import regeneratorRuntime from "regenerator-runtime";
 import SpeakerLabel from './SpeakerLabel';
 // import { shortTimecode, secondsToTimecode } from '../../Util/timecode-converter/';
 
