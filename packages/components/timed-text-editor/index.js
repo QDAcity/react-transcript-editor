@@ -557,6 +557,7 @@ class TimedTextEditor extends React.Component {
           showTimecodes={this.props.showTimecodes}
           timecodeOffset={this.props.timecodeOffset}
           setEditorNewContentStateSpeakersUpdate={this.setEditorNewContentStateSpeakersUpdate}
+          changeSpeakerLabel={this.props.changeSpeakerLabel}
           onWordClick={this.onWordClick}
           handleAnalyticsEvents={this.props.handleAnalyticsEvents}
           isEditable={this.props.isEditable}
