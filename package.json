@@ -1,7 +1,7 @@
 {
   "name": "@qdacity/react-transcript-editor",
   "description": "A React component to make transcribing audio and video easier and faster.",
-  "version": "1.4.11",
+  "version": "1.4.12",
   "keywords": [
     "transcript",
     "transcriptions",
