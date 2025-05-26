@@ -82,34 +82,47 @@ class WrapperBlock extends React.Component {
       return true;
     }
 
-    if(nextProps.block.getData().get('speaker') !== this.state.speaker){
-      console.log('shouldComponentUpdate wrapper speaker', nextProps.block.getData().get('speaker') , this.state.speaker )
+    const currentBlockSpeaker = this.props.block.getData().get('speaker');
+    const nextBlockSpeaker = nextProps.block.getData().get('speaker');
+
+
+    if (nextBlockSpeaker !== currentBlockSpeaker) {
+      console.log('shouldComponentUpdate wrapper speaker changed', {
+        current: currentBlockSpeaker,
+        next: nextBlockSpeaker,
+        stateVal: this.state.speaker
+      });
       return true;
     }
+
     return false;
   };
 
   componentDidUpdate  = (prevProps, prevState) =>{
 
-    if(prevProps.block.getData().get('speaker') !== prevState.speaker){
-        console.log('componentDidUpdate wrapper speaker', prevProps.block.getData().get('speaker') , prevState.speaker );
-        
-        this.setState({
-          speaker: prevProps.block.getData().get('speaker')
-        })
+    const currentBlockSpeaker = this.props.block.getData().get('speaker');
+    const prevBlockSpeaker = prevProps.block.getData().get('speaker');
 
-        return true;
-      }
+    if (prevBlockSpeaker !== currentBlockSpeaker && currentBlockSpeaker !== this.state.speaker) {
+      console.log('componentDidUpdate: Updating speaker state', {
+        prevBlockSpeaker,
+        currentBlockSpeaker,
+        currentStateVal: this.state.speaker
+      });
+      
+      this.setState({
+        speaker: currentBlockSpeaker
+      });
+    }
   }
 
   handleOnClickEdit = async () => {
     const oldSpeakerName = this.state.speaker;
-    const newSpeakerName = await this.props.blockProps.changeSpeakerLabel();
-    if (newSpeakerName !== '' && newSpeakerName !== null) {
-      this.setState({ speaker: newSpeakerName });
-      // setting this to false seems to be what the patch does - should be refactored so renaming all instances of a speaker is possible again
-      const isUpdateAllSpeakerInstances = false;
-     
+    const { label: newSpeakerName, renameAllInstances } = await this.props.blockProps.changeSpeakerLabel();
+    const isUpdateAllSpeakerInstances = renameAllInstances?.rename === true;
+      if (newSpeakerName && newSpeakerName.trim() !== '') {
+        this.setState({ speaker: newSpeakerName });
+
       if (this.props.blockProps.handleAnalyticsEvents) {
         this.props.blockProps.handleAnalyticsEvents({
           category: 'WrapperBlock',
@@ -118,6 +131,7 @@ class WrapperBlock extends React.Component {
           value: newSpeakerName
         });
       }
+
 
       if(isUpdateAllSpeakerInstances){
         const ContentState = this.props.blockProps.editorState.getCurrentContent();
