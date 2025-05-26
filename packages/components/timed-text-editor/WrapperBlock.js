@@ -120,8 +120,8 @@ class WrapperBlock extends React.Component {
     const oldSpeakerName = this.state.speaker;
     const { label: newSpeakerName, renameAllInstances } = await this.props.blockProps.changeSpeakerLabel();
     const isUpdateAllSpeakerInstances = renameAllInstances?.rename === true;
-     if (newSpeakerName && newSpeakerName.trim() !== '') {
-    this.setState({ speaker: newSpeakerName });
+      if (newSpeakerName && newSpeakerName.trim() !== '') {
+        this.setState({ speaker: newSpeakerName });
 
       if (this.props.blockProps.handleAnalyticsEvents) {
         this.props.blockProps.handleAnalyticsEvents({
