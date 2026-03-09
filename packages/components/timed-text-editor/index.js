@@ -255,7 +255,18 @@ class TimedTextEditor extends React.Component {
       this.state.editorState,
       newContentState
     );
-    this.setState({ editorState: newEditorState });
+    this.setState({ editorState: newEditorState }, () => {
+      const format =  this.props.autoSaveContentType;
+      const title = this.props.title;
+
+      const data = exportAdapter(
+        convertToRaw(newEditorState.getCurrentContent()),
+        format,
+        title
+      );
+
+      this.props.handleAutoSaveChanges(data);
+    });
   };
 
   setEditorNewContentStateSpeakersUpdate = newContentState => {
