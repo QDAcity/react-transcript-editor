@@ -621,8 +621,7 @@ TimedTextEditor.propTypes = {
   timecodeOffset: PropTypes.number,
   handleAnalyticsEvents: PropTypes.func,
   showSpeakers: PropTypes.bool,
-  showTimecodes: PropTypes.bool,
-  fileName: PropTypes.string
+  showTimecodes: PropTypes.bool
 };
 
 export default TimedTextEditor;
