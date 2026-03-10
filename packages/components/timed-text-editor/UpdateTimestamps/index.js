@@ -48,7 +48,7 @@ const createContentFromEntityList = (currentContent, newEntities) => {
       data: {
         speaker: speaker,
         words: blockEntites,
-        start: blockEntites[0].start
+        start: blockEntites.length > 0 ? blockEntites[0].start : 0
       },
       entityRanges: generateEntitiesRanges(blockEntites, 'punct'),
     };
