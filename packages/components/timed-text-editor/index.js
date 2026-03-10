@@ -265,6 +265,7 @@ class TimedTextEditor extends React.Component {
         title
       );
 
+      clearTimeout(this.saveTimer);
       this.props.handleAutoSaveChanges(data);
     });
   };
@@ -289,6 +290,7 @@ class TimedTextEditor extends React.Component {
           title
         );
 
+        clearTimeout(this.saveTimer);
         this.props.handleAutoSaveChanges(data);
       }
     );
