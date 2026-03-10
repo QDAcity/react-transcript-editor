@@ -265,6 +265,7 @@ class TimedTextEditor extends React.Component {
         title
       );
 
+      clearTimeout(this.saveTimer);
       this.props.handleAutoSaveChanges(data);
     });
   };
@@ -289,6 +290,7 @@ class TimedTextEditor extends React.Component {
           title
         );
 
+        clearTimeout(this.saveTimer);
         this.props.handleAutoSaveChanges(data);
       }
     );
@@ -619,8 +621,7 @@ TimedTextEditor.propTypes = {
   timecodeOffset: PropTypes.number,
   handleAnalyticsEvents: PropTypes.func,
   showSpeakers: PropTypes.bool,
-  showTimecodes: PropTypes.bool,
-  fileName: PropTypes.string
+  showTimecodes: PropTypes.bool
 };
 
 export default TimedTextEditor;
