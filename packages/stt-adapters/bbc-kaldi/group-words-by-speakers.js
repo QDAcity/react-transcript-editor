@@ -25,6 +25,9 @@ function addSpeakerToEachWord(words, segments) {
     const tmpSpeakerSegment = findSegmentForWord(word, segments);
 
     word.speaker = formatSpeakerName(tmpSpeakerSegment.speaker);
+    // Attach segment start time to force separate paragraphs for distinct segments
+    // even if the assigned speaker name is exactly the same.
+    word.segmentStart = tmpSpeakerSegment.start !== undefined ? tmpSpeakerSegment.start : 'unknown';
     tmpWordsWithSpeakers.push(word);
   });
 
@@ -39,20 +42,22 @@ function addSpeakerToEachWord(words, segments) {
  */
 function groupWordsBySpeaker(wordsWithSpeakers) {
   let currentSpeaker = wordsWithSpeakers[0].speaker;
+  let currentSegmentStart = wordsWithSpeakers[0].segmentStart;
   const results = [ ];
   let paragraph = { words: [], text: '', speaker: currentSpeaker };
   wordsWithSpeakers.forEach((word) => {
-    // if current speaker same as word speaker add words to paragraph
-    if (currentSpeaker === word.speaker) {
+    // if current speaker same as word speaker AND segment start is the same, add words to paragraph
+    if (currentSpeaker === word.speaker && currentSegmentStart === word.segmentStart) {
       paragraph.words.push(word);
       paragraph.text += word.punct + ' ';
       paragraph.speaker = currentSpeaker;
     }
-    // if it's not same speaker
+    // if it's not same speaker or a new segment started
     else {
       paragraph.text = paragraph.text.trim();
       results.push(paragraph);
       currentSpeaker = word.speaker;
+      currentSegmentStart = word.segmentStart;
        paragraph = {
         words: [word],
         text: word.punct + ' ',
